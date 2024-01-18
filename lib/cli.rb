@@ -14,7 +14,7 @@ class CLI
     authenticate
     system('clear')
     greet
-    while menu != '4'
+    while menu != '5'
     end
     end_program
   end
@@ -28,7 +28,8 @@ class CLI
     puts "\n1. Show the Current Week Top 10 Popular Playstation Games"
     puts '2. Show the Current Top Ten Trophy Hunters'
     puts '3. Reset password'
-    puts '4. Exit'
+    puts '4. Sign out'
+    puts '5. Exit'
 
     option_num = gets.chomp
 
@@ -61,6 +62,10 @@ class CLI
       puts "\nPlease enter a new password:"
       new_password = STDIN.noecho(&:gets).chomp
       User.reset_password(@username, new_password)
+    when '4'
+      puts "\nCome back soon!"
+      puts "\n"
+      authenticate
     end
 
     option_num
@@ -68,6 +73,7 @@ class CLI
 
   def end_program
     puts 'Goodbye!'
+    exit(true)
   end
 
   def authenticate
@@ -82,6 +88,8 @@ class CLI
         authenticated = login
       elsif get_input == 'sign up'
         create_user
+      elsif get_input == 'exit'
+        end_program
       else
         puts 'Please enter a vaild option'
       end
